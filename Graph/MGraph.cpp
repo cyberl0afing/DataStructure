@@ -60,9 +60,35 @@ int DFS(MGraph G,int i){
     return 0;
 
 }//遍历I
+int BFS(MGraph G,int * queue,int &rear){
+    if(rear==-1){
+        return 0;
+    }//duiwukongle
+    while (rear!=-1){
+        int i=queue[rear];
+        rear--;
+
+        printf("%d",G.node[i].data);
+
+        G.visited[i]= false;
+
+        for (int j = 0; j < 5; ++j) {
+            if(G.visited[j] && G.edge[i][j]!=0){
+                rear++;
+                queue[rear]=j;
+                G.visited[j]= false;
+
+            }//jiang xianglinjiedian jiaru duilie
+        }
+    }
+}//weilefangbain yong shuzu le
 int main(){
     MGraph G;
     Graph_ini(G);
     Graph_reset_visited(G);
     DFS(G,0);
+    int queue[100]={};//for node number
+    int rear=0;
+    queue[0]=0;
+    BFS(G,queue,rear);
 }
