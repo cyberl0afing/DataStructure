@@ -21,7 +21,7 @@ typedef struct GraphNode{
 };//node
 typedef struct MGraph{
     GraphNode node[5];
-    int edge[4][4];//5*5邻接矩阵
+    int edge[5][5];//5*5邻接矩阵
     bool visited[5];
 
 };//
@@ -42,18 +42,18 @@ int Graph_ini(MGraph &G) {
     return 0;
 }//生成无向图
 int Graph_reset_visited(MGraph &G){
-    for (int i = 0; i < 4; ++i) {
-        G.visited[i]= false;
+    for (int i = 0; i < 5; ++i) {
+        G.visited[i]= true;
     }
     return 0;
 }
 
 int DFS(MGraph G,int i){
     printf("%d",G.node[i].data);//打印节点值
-    G.visited[i]= true;//设置访问标记
+    G.visited[i]= false;//设置访问标记
     //判断和i邻接的顶点，对相邻顶点调用DFS算法
-    for (int j = 0; j <4 ; ++j) {
-        if(G.edge[i][j]!=0&&(!G.visited[j])){
+    for (int j = 0; j <5; j++) {
+        if((G.edge[i][j])!=0 && (G.visited[j])){
             DFS(G,j);
         }//判断是否有通向相邻节点的路径，同时该节点是否被访问
     }
